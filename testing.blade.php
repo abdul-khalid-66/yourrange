@@ -69,9 +69,7 @@ php artisan make:model Setting
 php artisan make:model Notification
 php artisan make:model ActivityLog
 
-
-
-==========================================================================================================================
+1 ==========================================================================================================================
 
 1.Core Multi-Tenancy Tables
 
@@ -591,7 +589,9 @@ Schema::create('activity_log', function (Blueprint $table) {
     $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
     $table->index(['tenant_id', 'log_name']);
 });
-===============================================================================================================
+
+
+2 ===============================================================================================================
 
 
 // app/Models/Tenant.php
@@ -1285,9 +1285,7 @@ sessions = { id | user_id | ip_address | user_agent | payload | last_activity }
 businesses = { id | tenant_id | name | tax_number | registration_number | phone | email | address | logo_path | receipt_header | receipt_footer | created_at | updated_at | deleted_at }
 branches = { id | tenant_id | business_id | name | code | phone | email | address | is_main | created_at | updated_at | deleted_at }
 
-
 4. Inventory Management
-
 categories = { id | tenant_id | name | code | parent_id | description | created_at | updated_at | deleted_at }
 brands = { id | tenant_id | name | description | logo_path | created_at | updated_at | deleted_at }
 suppliers = { id | tenant_id | name | contact_person | email | phone | alternate_phone | address | tax_number | created_at | updated_at | deleted_at }
@@ -1305,13 +1303,11 @@ returns = { id | tenant_id | sale_id | customer_id | user_id | return_number | t
 return_items = { id | tenant_id | return_id | sale_item_id | quantity | unit_price | total_price | reason | created_at | updated_at }
 
 6. Purchasing & Suppliers
-
 purchases = { id | tenant_id | supplier_id | branch_id | invoice_number | subtotal | tax_amount | discount_amount | shipping_amount | total_amount | status | notes | purchase_date | expected_delivery_date | created_at | updated_at | deleted_at }
 purchase_items = { id | tenant_id | purchase_id | product_id | variant_id | quantity | quantity_received | unit_price | tax_rate | tax_amount | discount_rate | discount_amount | total_price | notes | created_at | updated_at }
 purchase_payments = { id | tenant_id | purchase_id | payment_method_id | amount | reference | notes | user_id | created_at | updated_at }
 
 7. Financial Management
-
 accounts = { id | tenant_id | name | type | account_number | opening_balance | current_balance | currency | is_default | is_active | description | created_at | updated_at | deleted_at }
 transactions = { id | tenant_id | account_id | type | amount | reference | description | category | user_id | date | created_at | updated_at }
 expense_categories = { id | tenant_id | name | description | created_at | updated_at | deleted_at }
@@ -1319,23 +1315,18 @@ expenses = { id | tenant_id | expense_category_id | account_id | amount | refere
 tax_rates = { id | tenant_id | name | rate | type | is_inclusive | description | created_at | updated_at }
 
 8. Reporting & Analytics
-
 daily_sales = { id | tenant_id | branch_id | date | total_sales | total_amount | total_tax | total_discount | total_profit | created_at | updated_at }
 stock_history = { id | tenant_id | branch_id | product_id | variant_id | date | opening_stock | purchases | sales | adjustments | closing_stock | created_at | updated_at }
 
 
 9. System & Settings
-
 settings = { id | tenant_id | key | value | created_at | updated_at }
 notifications = { id | tenant_id | type | notifiable_type | notifiable_id | data | read_at | created_at | updated_at }
 activity_log = { id | tenant_id | log_name | description | subject_type | subject_id | causer_type | causer_id | properties | created_at | updated_at }
 
 ===================================================================================================================
 
-
-
-here's a comprehensive list of tables, forms, and screens you'll need to create for your multi-tenant application:
-
+here's a comprehensive list of tables, forms, and screens I'll need to create for my multi-tenant application:
 ##### 1. Core Multi-Tenancy (5 screens)
 - **Tenants Management**
   - List tenants (table view)
@@ -1483,9 +1474,7 @@ This structure provides complete coverage for all database entities while mainta
 I'll help you create a comprehensive controller and observer structure for your multi-tenant POS system. We'll follow RESTful conventions and implement best practices for each component.
 
 ## Controller Structure
-
 ### 1. Core Multi-Tenancy Controllers
-
 ```php
 // app/Http/Controllers/Tenant/TenantController.php
 class TenantController extends Controller
@@ -2006,7 +1995,7 @@ class TransactionObserver
 
 1. Create all the controllers in their respective directories:
    ```
-   app/Http/Controllers/
+   app/Http/Controllers/admin
    ├── Tenant/
    ├── Auth/
    ├── User/
